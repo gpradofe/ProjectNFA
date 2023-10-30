@@ -1,4 +1,4 @@
-"DFA,,,"
+"Original DFA,,,"
 q1,q1+q2+q3,q1+q2+q3+q4,q1+q3,q1+q3+q4,q1+q4
 0,1,
 q1,,,

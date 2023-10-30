@@ -1,0 +1,13 @@
+Testing String: '010110'
+
+Paths:
+  Rejected Paths:
+  Trap Paths:
+  Accepting Paths:
+    q1 -> q1 -> q1+q2+q3 -> q1+q3 -> *q1+q2+q3+q4 -> *q1+q2+q3+q4 -> *q1+q3+q4
+
+Summary for '010110':
+  Total Paths: 1
+  Accepting Paths: 1
+          Paths:
+            - q1 -> q1 -> q1+q2+q3 -> q1+q3 -> *q1+q2+q3+q4 -> *q1+q2+q3+q4 -> *q1+q3+q4
