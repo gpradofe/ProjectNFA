@@ -1,0 +1,13 @@
+File: re-nfa.csv N1,,,
+
+Testing String: 'aabbb'
+
+Paths:
+  Rejected Paths:
+  Trap Paths:
+    q0 (Trap State)
+  Accepting Paths:
+
+Summary for 'aabbb':
+  Total Paths: 1
+  Accepting Paths: 0
