@@ -1,0 +1,22 @@
+File: N1
+
+Testing String: '010110'
+
+Paths:
+  Rejected Paths:
+    q1 -> q1 -> q1 -> q1 -> q1 -> q1 -> q1
+    q1 -> q1 -> q1 -> q1 -> q1 -> q2 -> q3
+  Trap Paths:
+    q1 -> q1 -> q1 -> q1 -> q1 -> q2 -> q3 (Trap State)
+    q1 -> q1 -> q1 -> q1 -> q2 (Trap State)
+    q1 -> q1 -> q2 -> q3 (Trap State)
+  Accepting Paths:
+    q1 -> q1 -> q1 -> q1 -> q2 -> q3 -> *q4 -> *q4
+    q1 -> q1 -> q2 -> q3 -> *q4 -> *q4 -> *q4
+
+Summary for '010110':
+  Total Paths: 7
+  Accepting Paths: 2
+          Paths:
+                       - q1 -> q1 -> q1 -> q1 -> q2 -> q3 -> *q4 -> *q4
+                       - q1 -> q1 -> q2 -> q3 -> *q4 -> *q4 -> *q4
