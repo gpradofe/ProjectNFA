@@ -1,19 +1,22 @@
 import csv
 from collections import defaultdict, deque
 
+# Class for converting NFA to DFA
 class NFAToDFAConverter:
     def __init__(self, filename: str):
         self.filename = filename
-        self.nfa_transitions = defaultdict(list)
-        self.start_state = None
-        self.accept_states = set()
+        self.nfa_transitions = defaultdict(list)  # Dictionary to store NFA transitions
+        self.start_state = None  # The start state of the NFA
+        self.accept_states = set()  # Set of accept states in the NFA
 
     def epsilon_closure(self, states):
+        # Compute epsilon closure of a set of NFA states
         stack = list(states)
         closure = set(states)
 
         while stack:
             state = stack.pop()
+            # Explore epsilon transitions
             for next_state in self.nfa_transitions.get((state, '~'), []):
                 if next_state not in closure:
                     closure.add(next_state)
@@ -21,16 +24,18 @@ class NFAToDFAConverter:
         return closure
 
     def nfa_to_dfa(self):
-        dfa = defaultdict(list)
+        # Convert NFA to DFA
+        dfa = defaultdict(list)  # Dictionary to store DFA transitions
         dfa_start_state = '+'.join(sorted(self.epsilon_closure([self.start_state])))
-        dfa_accept_states = set()
-        unmarked_states = [dfa_start_state]
-        dfa_states = {dfa_start_state}
+        dfa_accept_states = set()  # Set of accept states in the DFA
+        unmarked_states = [dfa_start_state]  # Unmarked states in the DFA
+        dfa_states = {dfa_start_state}  # Set of states in the DFA
 
         while unmarked_states:
             current_dfa_state = unmarked_states.pop()
             nfa_states = set(current_dfa_state.split('+'))
 
+            # Explore transitions for each symbol in the alphabet
             for symbol in set(sym for state, sym in self.nfa_transitions if sym != '~'):
                 next_states = set()
                 for state in nfa_states:
@@ -46,6 +51,7 @@ class NFAToDFAConverter:
                         dfa_states.add(next_dfa_state)
                         unmarked_states.append(next_dfa_state)
 
+        # Determine accept states in the DFA
         for dfa_state in dfa_states:
             if any(state in self.accept_states for state in dfa_state.split('+')):
                 dfa_accept_states.add('*' + dfa_state)
@@ -53,6 +59,7 @@ class NFAToDFAConverter:
         return dfa, dfa_start_state, dfa_accept_states
 
     def read_nfa_from_file(self):
+        # Read NFA transitions from a CSV file
         with open(self.filename) as file:
             reader = csv.reader(file, delimiter=',')
             for line_number, line in enumerate(reader):
@@ -68,6 +75,7 @@ class NFAToDFAConverter:
                             self.accept_states.add(state)
 
     def write_dfa_to_file(self, dfa, start_state, accept_states, filename_suffix='Minimized'):
+        # Write DFA to a CSV file
         output_filename = f"{filename_suffix}_{self.filename}"
         with open(output_filename, 'w', newline='') as file:
             writer = csv.writer(file)
@@ -89,20 +97,22 @@ class NFAToDFAConverter:
         print(f"{filename_suffix} DFA saved to {output_filename}")
 
     def convert_and_export(self):
+        # Read NFA, convert to DFA, and write DFA to a file
         self.read_nfa_from_file()
         dfa, dfa_start_state, dfa_accept_states = self.nfa_to_dfa()
         self.write_dfa_to_file(dfa, dfa_start_state, dfa_accept_states, 'Original')
 
         return dfa, dfa_start_state, dfa_accept_states
 
+# Class for minimizing a DFA
 class DFAMinimizer:
     def __init__(self, dfa, start_state, accept_states):
-        self.dfa = dfa
-        self.start_state = start_state
-        self.accept_states = accept_states
+        self.dfa = dfa  # DFA transitions
+        self.start_state = start_state  # Start state of the DFA
+        self.accept_states = accept_states  # Set of accept states in the DFA
 
     def get_reachable_states(self):
-        """Returns the set of states that are reachable from the start state."""
+        # Returns the set of states that are reachable from the start state
         reachable_states = set()
         queue = deque([self.start_state])
 
@@ -118,12 +128,12 @@ class DFAMinimizer:
         return reachable_states
 
     def minimize(self):
+        # Minimize the DFA
         # Step 1: Remove unreachable states
         reachable_states = self.get_reachable_states()
         self.dfa = {k: v for k, v in self.dfa.items() if k[0] in reachable_states}
 
         # Step 2: Partition states into equivalence classes
-        # Initial partition (accept states and non-accept states)
         accept_states = {state for state in reachable_states if '*' + state in self.accept_states}
         non_accept_states = reachable_states - accept_states
         partitions = [accept_states, non_accept_states]
@@ -138,8 +148,7 @@ class DFAMinimizer:
                 break
             partitions = new_partitions
 
-        # Step 3: Construct minimized DFA
-        # Using representative state names from each partition
+        # Step 3: Construct minimized DFA using representative state names
         minimized_dfa = defaultdict(list)
         representative_states = {min(p): p for p in partitions}
         state_mapping = {state: min(partition) for partition in partitions for state in partition}
@@ -151,14 +160,14 @@ class DFAMinimizer:
                 if to_state not in minimized_dfa[(from_state, symbol)]:
                     minimized_dfa[(from_state, symbol)].append(to_state)
 
-        # Determining new start and accept states
+        # Determine new start and accept states
         new_start_state = state_mapping[self.start_state]
         new_accept_states = {state_mapping[state.replace('*', '')] for state in self.accept_states if state.replace('*', '') in state_mapping}
 
         return minimized_dfa, new_start_state, new_accept_states, representative_states
 
     def partition(self, states, partitions):
-        """Refines the partition of states based on their transitions."""
+        # Refines the partition of states based on their transitions
         if not states:
             return []
 
@@ -173,12 +182,14 @@ class DFAMinimizer:
         return list(subsets.values())
 
     def find_partition(self, state, partitions):
-        """Finds the partition index for a given state."""
+        # Finds the partition index for a given state
         for idx, partition in enumerate(partitions):
             if state in partition:
                 return idx
         return None
+
     def write_minimized_dfa_to_file(self, minimized_dfa, minimized_start_state, minimized_accept_states, filename):
+        # Write minimized DFA to a CSV file
         output_filename = f"Minimized_{filename}"
         with open(output_filename, 'w', newline='') as file:
             writer = csv.writer(file)
@@ -219,5 +230,6 @@ def main():
         minimizer.write_minimized_dfa_to_file(minimized_dfa, minimized_dfa_start_state, minimized_dfa_accept_states, filename)
     except:
         print("Error: The NFA is already minimized.")
+
 if __name__ == "__main__":
     main()
