@@ -1,0 +1,62 @@
+File: N5
+
+Testing String: 'ba'
+
+Paths:
+  Rejected Paths:
+    *q0 -> q3 -> q2
+  Trap Paths:
+  Accepting Paths:
+
+Summary for 'ba':
+  Total Paths: 1
+  Accepting Paths: 0
+
+Testing String: 'bb'
+
+Paths:
+  Rejected Paths:
+  Trap Paths:
+  Accepting Paths:
+    *q0 -> q3 -> *q0
+
+Summary for 'bb':
+  Total Paths: 1
+  Accepting Paths: 1
+          Paths:
+                       - *q0 -> q3 -> *q0
+
+Testing String: 'abab'
+
+Paths:
+  Rejected Paths:
+    *q0 -> q1 -> q2 -> q1 -> q2
+    *q0 -> q1 -> q2 -> *q0 -> q1 -> q2
+    *q0 -> q1 -> q3 -> *q0 -> q1 -> q2
+  Trap Paths:
+  Accepting Paths:
+    *q0 -> q1 -> q2 -> q1 -> q3 -> *q0
+    *q0 -> q1 -> q2 -> *q0 -> q1 -> q3 -> *q0
+    *q0 -> q1 -> q3 -> *q0 -> q1 -> q3 -> *q0
+
+Summary for 'abab':
+  Total Paths: 6
+  Accepting Paths: 3
+          Paths:
+                       - *q0 -> q1 -> q2 -> q1 -> q3 -> *q0
+                       - *q0 -> q1 -> q2 -> *q0 -> q1 -> q3 -> *q0
+                       - *q0 -> q1 -> q3 -> *q0 -> q1 -> q3 -> *q0
+
+Testing String: ''
+
+Paths:
+  Rejected Paths:
+  Trap Paths:
+  Accepting Paths:
+    *q0
+
+Summary for '':
+  Total Paths: 1
+  Accepting Paths: 1
+          Paths:
+                       - *q0

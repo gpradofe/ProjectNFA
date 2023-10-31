@@ -136,7 +136,49 @@ This program takes a Non-deterministic Finite Automaton (NFA) and a string as in
     - **String**: ``
       - **Purpose**: Similar to other NFAs, this string evaluates the handling of an empty string, focusing on correct processing of epsilon transitions to an accept state.
 
-Each test string is carefully selected to challenge specific aspects of the NFAs, like looping, state transitions (including epsilon transitions), and accurate identification of accept states, ensuring thorough validation and robustness.
+- **NFA N5**:
+  **(q0, q1, q2, q3)** with epsilon transitions and multiple accept states.
+
+  - **Figure**: N5-fig. 2.15
+  - **States**: \*q0, q1, q2, q3
+  - **Alphabet**: a, b
+  - **Start State**: \*q0
+  - **Accept States**: \*q2, q3
+  - **Transition Function**:
+    - \*q0, a, q1
+    - q1, b, q2
+    - \*q0, b, q3
+    - q2, a, q1
+    - q2, ~, \*q0
+    - q3, b, \*q0
+    - q1, ~, q3
+    - q3, a, q2
+
+- **Rationale Behind the Design**:
+  This NFA, N5, is designed to handle a variety of scenarios with a complex set of transitions, including epsilon transitions and multiple accept states. The idea is to create a machine that can accept strings based on different patterns and test the robustness of the NFA in handling:
+
+  1. Transitions between non-sequential states.
+  2. Resetting back to the start state after reaching an accept state.
+  3. Managing epsilon transitions creatively to navigate between states without input symbols.
+
+- **Test Strings for N5:**
+
+  - **String**: ba
+
+    - **Purpose**: This string tests the NFA's ability to start at *q0, transition to q3 on 'b', and then move to q2 on 'a'. It's a straightforward path to an accept state (*q2) through different routes, illustrating basic functionality.
+
+  - **String**: bb
+
+    - **Purpose**: Starting from *q0, this string first transitions to q3 on 'b', and then goes back to *q0 on another 'b'. This path tests the NFA's looping capability and returning to the start state.
+
+  - **String**: abab
+
+    - **Purpose**: This string challenges the NFA's capability to switch states multiple times. Beginning at \*q0, it moves to q1 on 'a', then uses the epsilon transition to q3, transitions to q2 on 'b', goes back to q1 on 'a', and finally moves to q3 on 'b'. It showcases the NFA's ability to handle complex, non-linear state transitions.
+
+  - **String**: ``
+    - **Purpose**: The empty string checks the NFA's handling of epsilon transitions directly from the start state. In this NFA, the empty string should not be accepted as there's no direct epsilon transition to an accept state from the start state, which is a critical assessment of handling empty inputs correctly.
+
+  Each test string is carefully selected to challenge specific aspects of the NFAs, like looping, state transitions (including epsilon transitions), and accurate identification of accept states, ensuring thorough validation and robustness.
 
 ### [Program 2: NFA to DFA Conversion and Minimization](#program-2-nfa-to-dfa-conversion-and-minimization)
 
@@ -175,20 +217,19 @@ Following the conversion, the `DFAMinimizer` class takes over to reduce the DFA'
 
 #### [Test Cases and Rationale](#test-cases-and-rationale)
 
-- **NFAToDFAConverter**:
+To rigorously evaluate our NFAToDFAConverter and DFAMinimizer, we specifically chose a range of NFAs, namely N1, N3, and N4, for testing, considering their diverse structures and characteristics:
 
-  - **Simple NFAs**: Test NFAs without epsilon transitions to ensure straightforward conversion is handled correctly.
-  - **NFAs with Epsilon Transitions**: Check how well the converter handles epsilon closures and transitions.
-  - **Overlapping Transitions**: Test NFAs where multiple transition paths exist for the same input symbol in a single state.
-  - **Complex NFAs**: Utilize NFAs with multiple accept states to verify accurate state and accept state identification in the resultant DFA.
+- **N1**: This NFA was selected for its straightforward structure without epsilon transitions. It served as a baseline to ensure our converter can handle basic NFA to DFA transformations correctly.
 
-- **DFAMinimizer**:
-  - **Redundant State Removal**: Ensure the minimizer successfully identifies and removes states not contributing to the DFA's language recognition.
-  - **Reachability**: Confirm all states in the minimized DFA are reachable from the start state.
+- **N3**: Chosen for its complexity, including epsilon transitions and multiple accepting states, N3 helped in testing our converter's ability to handle more advanced scenarios, particularly in managing epsilon closures and transitions.
+
+- **N4**: This NFA was included for its overlapping and ambiguous transitions. Testing with N4 allowed us to verify the converter's effectiveness in scenarios where multiple transition paths exist for the same input symbol in a single state.
+
+The conversion process was then subjected to a validation phase where the output DFAs from our NFAToDFAConverter were analyzed. This analysis involved running these DFAs through the Trace-Orozcoaniceto tool, a code specifically designed for testing and validating DFAs. We input the same strings as used in the original NFAs to ensure a consistent comparison.
 
 ### Conclusion
 
-The `NFAToDFAConverter` and `DFAMinimizer` classes, along with their associated test cases, provide a comprehensive approach to understanding and manipulating finite automata. The tests are designed to cover a range of scenarios, from basic to complex NFAs, ensuring robust conversion and minimization processes. The program's functionality focuses on accurate conversion and effective minimization, emphasizing language preservation and state efficiency.
+The testing results were highly satisfactory. The output DFAs for each of the NFAs N1, N3, and N4, when run through the Trace-Orozcoaniceto code with corresponding input strings, behaved as expected. This consistency across different types of NFAs and their respective DFAs confirmed the robustness and accuracy of our NFAToDFAConverter and DFAMinimizer tools. The successful validation underscores our tools' capability in handling a wide range of NFAs, from simple to complex, and converting them efficiently into reliable DFAs.
 
 ### [Extra Credit Content](#extra-credit-content)
 

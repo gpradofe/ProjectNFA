@@ -1,0 +1,37 @@
+File: Original DFA,,,
+
+Testing String: '00'
+
+Paths:
+  Rejected Paths:
+  Trap Paths:
+    q1+q2+q4 (Trap State)
+  Accepting Paths:
+
+Summary for '00':
+  Total Paths: 1
+  Accepting Paths: 0
+
+Testing String: '000'
+
+Paths:
+  Rejected Paths:
+  Trap Paths:
+    q1+q2+q4 (Trap State)
+  Accepting Paths:
+
+Summary for '000':
+  Total Paths: 1
+  Accepting Paths: 0
+
+Testing String: ''
+
+Paths:
+  Rejected Paths:
+    q1+q2+q4
+  Trap Paths:
+  Accepting Paths:
+
+Summary for '':
+  Total Paths: 1
+  Accepting Paths: 0

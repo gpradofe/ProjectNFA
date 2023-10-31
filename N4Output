@@ -1,0 +1,45 @@
+File: N4-fig. 1.36
+
+Testing String: 'baa'
+
+Paths:
+  Rejected Paths:
+    *q1 -> q2 -> q2 -> q2
+    *q1 -> q2 -> q2 -> q3
+  Trap Paths:
+    *q1 -> q3 (Trap State)
+  Accepting Paths:
+    *q1 -> q2 -> q3 -> *q1
+
+Summary for 'baa':
+  Total Paths: 4
+  Accepting Paths: 1
+          Paths:
+                       - *q1 -> q2 -> q3 -> *q1
+
+Testing String: 'bb'
+
+Paths:
+  Rejected Paths:
+    *q1 -> q2 -> q3
+  Trap Paths:
+    *q1 -> q3 (Trap State)
+  Accepting Paths:
+
+Summary for 'bb':
+  Total Paths: 2
+  Accepting Paths: 0
+
+Testing String: ''
+
+Paths:
+  Rejected Paths:
+  Trap Paths:
+  Accepting Paths:
+    *q1
+
+Summary for '':
+  Total Paths: 1
+  Accepting Paths: 1
+          Paths:
+                       - *q1

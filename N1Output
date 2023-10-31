@@ -20,3 +20,117 @@ Summary for '010110':
           Paths:
                        - q1 -> q1 -> q1 -> q1 -> q2 -> q3 -> *q4 -> *q4
                        - q1 -> q1 -> q2 -> q3 -> *q4 -> *q4 -> *q4
+
+Testing String: '111'
+
+Paths:
+  Rejected Paths:
+    q1 -> q1 -> q1 -> q1
+    q1 -> q1 -> q1 -> q2
+  Trap Paths:
+    q1 -> q1 -> q2 (Trap State)
+    q1 -> q2 (Trap State)
+  Accepting Paths:
+    q1 -> q1 -> q2 -> q3 -> *q4
+    q1 -> q2 -> q3 -> *q4 -> *q4
+
+Summary for '111':
+  Total Paths: 6
+  Accepting Paths: 2
+          Paths:
+                       - q1 -> q1 -> q2 -> q3 -> *q4
+                       - q1 -> q2 -> q3 -> *q4 -> *q4
+
+Testing String: '010'
+
+Paths:
+  Rejected Paths:
+    q1 -> q1 -> q1 -> q1
+    q1 -> q1 -> q2 -> q3
+  Trap Paths:
+    q1 -> q1 -> q2 -> q3 (Trap State)
+  Accepting Paths:
+
+Summary for '010':
+  Total Paths: 3
+  Accepting Paths: 0
+
+Testing String: ''
+
+Paths:
+  Rejected Paths:
+    q1
+  Trap Paths:
+  Accepting Paths:
+
+Summary for '':
+  Total Paths: 1
+  Accepting Paths: 0
+File: N1
+
+Testing String: '010110'
+
+Paths:
+  Rejected Paths:
+    q1 -> q1 -> q1 -> q1 -> q1 -> q1 -> q1
+    q1 -> q1 -> q1 -> q1 -> q1 -> q2 -> q3
+  Trap Paths:
+    q1 -> q1 -> q1 -> q1 -> q1 -> q2 -> q3 (Trap State)
+    q1 -> q1 -> q1 -> q1 -> q2 (Trap State)
+    q1 -> q1 -> q2 -> q3 (Trap State)
+  Accepting Paths:
+    q1 -> q1 -> q1 -> q1 -> q2 -> q3 -> *q4 -> *q4
+    q1 -> q1 -> q2 -> q3 -> *q4 -> *q4 -> *q4
+
+Summary for '010110':
+  Total Paths: 7
+  Accepting Paths: 2
+          Paths:
+                       - q1 -> q1 -> q1 -> q1 -> q2 -> q3 -> *q4 -> *q4
+                       - q1 -> q1 -> q2 -> q3 -> *q4 -> *q4 -> *q4
+
+Testing String: '111'
+
+Paths:
+  Rejected Paths:
+    q1 -> q1 -> q1 -> q1
+    q1 -> q1 -> q1 -> q2
+  Trap Paths:
+    q1 -> q1 -> q2 (Trap State)
+    q1 -> q2 (Trap State)
+  Accepting Paths:
+    q1 -> q1 -> q2 -> q3 -> *q4
+    q1 -> q2 -> q3 -> *q4 -> *q4
+
+Summary for '111':
+  Total Paths: 6
+  Accepting Paths: 2
+          Paths:
+                       - q1 -> q1 -> q2 -> q3 -> *q4
+                       - q1 -> q2 -> q3 -> *q4 -> *q4
+
+Testing String: '010'
+
+Paths:
+  Rejected Paths:
+    q1 -> q1 -> q1 -> q1
+    q1 -> q1 -> q2 -> q3
+  Trap Paths:
+    q1 -> q1 -> q2 -> q3 (Trap State)
+  Accepting Paths:
+
+Summary for '010':
+  Total Paths: 3
+  Accepting Paths: 0
+
+Testing String: ''
+
+Paths:
+  Rejected Paths:
+    q1
+  Trap Paths:
+  Accepting Paths:
+
+Summary for '':
+  Total Paths: 1
+  Accepting Paths: 0

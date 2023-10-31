@@ -1,0 +1,53 @@
+File: Original DFA,,,
+
+Testing String: '010110'
+
+Paths:
+  Rejected Paths:
+  Trap Paths:
+  Accepting Paths:
+    q1 -> q1 -> q1+q2+q3 -> q1+q3 -> *q1+q2+q3+q4 -> *q1+q2+q3+q4 -> *q1+q3+q4
+
+Summary for '010110':
+  Total Paths: 1
+  Accepting Paths: 1
+          Paths:
+                       - q1 -> q1 -> q1+q2+q3 -> q1+q3 -> *q1+q2+q3+q4 -> *q1+q2+q3+q4 -> *q1+q3+q4
+
+Testing String: '111'
+
+Paths:
+  Rejected Paths:
+  Trap Paths:
+  Accepting Paths:
+    q1 -> q1+q2+q3 -> *q1+q2+q3+q4 -> *q1+q2+q3+q4
+
+Summary for '111':
+  Total Paths: 1
+  Accepting Paths: 1
+          Paths:
+                       - q1 -> q1+q2+q3 -> *q1+q2+q3+q4 -> *q1+q2+q3+q4
+
+Testing String: '010'
+
+Paths:
+  Rejected Paths:
+    q1 -> q1 -> q1+q2+q3 -> q1+q3
+  Trap Paths:
+  Accepting Paths:
+
+Summary for '010':
+  Total Paths: 1
+  Accepting Paths: 0
+
+Testing String: ''
+
+Paths:
+  Rejected Paths:
+    q1
+  Trap Paths:
+  Accepting Paths:
+
+Summary for '':
+  Total Paths: 1
+  Accepting Paths: 0

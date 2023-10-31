@@ -1,0 +1,45 @@
+File: N3-fig. 1.34
+
+Testing String: '00'
+
+Paths:
+  Rejected Paths:
+    q1 -> *q4 -> q5 -> q6
+  Trap Paths:
+    q1 (Trap State)
+  Accepting Paths:
+    q1 -> *q2 -> q3 -> *q2
+
+Summary for '00':
+  Total Paths: 3
+  Accepting Paths: 1
+          Paths:
+                       - q1 -> *q2 -> q3 -> *q2
+
+Testing String: '000'
+
+Paths:
+  Rejected Paths:
+    q1 -> *q2 -> q3 -> *q2 -> q3
+  Trap Paths:
+    q1 (Trap State)
+  Accepting Paths:
+    q1 -> *q4 -> q5 -> q6 -> *q4
+
+Summary for '000':
+  Total Paths: 3
+  Accepting Paths: 1
+          Paths:
+                       - q1 -> *q4 -> q5 -> q6 -> *q4
+
+Testing String: ''
+
+Paths:
+  Rejected Paths:
+    q1
+  Trap Paths:
+  Accepting Paths:
+
+Summary for '':
+  Total Paths: 1
+  Accepting Paths: 0
